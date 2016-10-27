@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ##使用说明
 ###下载说明
 *下载插件源代码
@@ -27,3 +28,7 @@
 ![price](/Users/fami_Lbb/Desktop/87A5E5B5-21E4-4409-822F-BAFBA3C7926E.png)
 
 xcode -> Build Settings -> Apple LLVM 7.1-Language - Objective C -> Weak Refrernces in Manual Retain Release  设置为YES
+=======
+# cordova-plugin-barcodescanner
+cordova-plugin-barcodescanner
+>>>>>>> 65b2110686de910e422f2486a93ac01fad3ae15d
