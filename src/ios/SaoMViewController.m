@@ -158,11 +158,11 @@ static NSString *saoText = @"将二维码/条形码放入框内，即可自动�
     //page
     [self.view addSubview:self.page];
     
-    //二维码
+    //条形码
     [self.oneButt setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
     [self.view addSubview:self.oneButt];
     
-    //条形码
+    //二维码
     [self.view addSubview:self.twoButt];
     
 }
@@ -349,20 +349,20 @@ static NSString *saoText = @"将二维码/条形码放入框内，即可自动�
                
                 if (_oneOrTwo) {
                     
-                    //二维码
-                     _output.metadataObjectTypes = [NSArray arrayWithObjects:AVMetadataObjectTypeQRCode,nil];
-                    
-                    //划定可扫描范围
-//                    [_output setRectOfInterest:CGRectMake(kLeadSpace/kScreenH, kTopH/kScreenW, kRectW2H/kScreenH, kScreenW)];
-                    
-//                    NSLog(@"二维码");
-
-                }else{
-                    
                     //条形码
                     _output.metadataObjectTypes = [NSArray arrayWithObjects:AVMetadataObjectTypeEAN13Code,AVMetadataObjectTypeEAN8Code,AVMetadataObjectTypeCode128Code,AVMetadataObjectTypeQRCode,nil];
                     
-//                    NSLog(@"条形码");
+                    //                   NSLog(@"条形码");
+
+                }else{
+                    
+                    //二维码
+                    _output.metadataObjectTypes = [NSArray arrayWithObjects:AVMetadataObjectTypeQRCode,nil];
+                    
+                    //划定可扫描范围
+                    //                    [_output setRectOfInterest:CGRectMake(kLeadSpace/kScreenH, kTopH/kScreenW, kRectW2H/kScreenH, kScreenW)];
+                    
+                    //                    NSLog(@"二维码");
                 
                 }
             
@@ -420,26 +420,7 @@ static NSString *saoText = @"将二维码/条形码放入框内，即可自动�
     
     
     
-    if (stringValue.length == 13) {
-        
-        //提示框
-        
-//        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"条形码" message:stringValue preferredStyle:UIAlertControllerStyleAlert];
-//        
-//        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//            
-//            [alert dismissViewControllerAnimated:YES completion:nil];
-//            
-//            [self backAction];
-//            
-//        }]];
-//        
-//        [self presentViewController:alert animated:YES completion:nil];
-        
-        NSLog(@"扫描条形码的结果%@",stringValue);
-        
-        
-    }else{
+    if (!_oneOrTwo) {
         
         if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:stringValue]]) {
             
@@ -451,8 +432,9 @@ static NSString *saoText = @"将二维码/条形码放入框内，即可自动�
             [self backAction];
         }
         
-        
     }
+    
+    
     
     self.block(stringValue);
     
@@ -518,7 +500,7 @@ static NSString *saoText = @"将二维码/条形码放入框内，即可自动�
         
         _oneButt = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 60, 40)];
         _oneButt.center = CGPointMake(kScreenW/2, kTopH + kRectW2H + 50);
-        [_oneButt setTitle:@"二维码" forState:UIControlStateNormal];
+        [_oneButt setTitle:@"条形码" forState:UIControlStateNormal];
         [_oneButt setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _oneButt.titleLabel.font = [UIFont systemFontOfSize:18];
         [_oneButt addTarget:self action:@selector(oneAction) forControlEvents:UIControlEventTouchUpInside];
@@ -535,7 +517,7 @@ static NSString *saoText = @"将二维码/条形码放入框内，即可自动�
         
         _twoButt = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 60, 40)];
         _twoButt.center = CGPointMake(kScreenW/2 + 100, kTopH + kRectW2H + 50);
-        [_twoButt setTitle:@"条形码" forState:UIControlStateNormal];
+        [_twoButt setTitle:@"二维码" forState:UIControlStateNormal];
         [_twoButt setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _twoButt.titleLabel.font = [UIFont systemFontOfSize:18];
         [_twoButt addTarget:self action:@selector(twoAction) forControlEvents:UIControlEventTouchUpInside];
@@ -550,7 +532,7 @@ static NSString *saoText = @"将二维码/条形码放入框内，即可自动�
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 
-    NSLog(@"内存警告");
+//    NSLog(@"内存警告");
 
 }
 
